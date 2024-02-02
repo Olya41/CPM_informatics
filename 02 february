@@ -1,0 +1,59 @@
+class Lesson:
+  def __init__(self, name, number, teacher):
+    self.name = name
+    self.number = number
+    self.teacher = teacher
+  def __repr__(self):
+    return str(self.name) + ", " + str(self.number) + ", " + str(self.teacher)
+  def replacement_name(self, new_name):
+    self.name = new_name
+  def replacement_number(self, new_number):
+    self.number = new_number
+  def replacement_teacher(self, new_teacher):
+    self.teacher = new_teacher
+
+
+class Day:
+  def __init__(self, day):
+    self.day = day
+    self.lessons = []
+  def push_lesson(self, lesson):
+    self.lessons.append(lesson)
+  def __repr__(self):
+    return str(self.day) + "\n" + "\n".join([str(i) for i in self.lessons])
+  def __iter__(self):
+    return iter(self.lessons)
+
+class Shedule:
+    def __init__(self, week):
+      self.week = week
+      self.days = []
+    def push_day(self, day):
+      self.days.append(day)
+    def __repr__(self):
+      return "\n\n".join([str(i) for i in self.days])
+    def __iter__(self):
+      return iter(self.days)
+
+
+a = Lesson("Math", 1, "Mrs. Miller")
+b = Lesson("English", 2, "Mr. Brown")
+c = Lesson("History", 3, "Mrs. Smith")
+day1 = Day("Monday")
+day2 = Day("Tuesday")
+day1.push_lesson(a)
+day1.push_lesson(b)
+day2.push_lesson(a)
+day2.push_lesson(c)
+week = Shedule("Week")
+week.push_day(day1)
+week.push_day(day2)
+for elem in week:
+  print(elem)
+  print()
+c.replacement_number(4)
+print(week)
+
+my_file = open("OurFile.txt", "w+")
+my_file.write(str(week))
+my_file.close()
